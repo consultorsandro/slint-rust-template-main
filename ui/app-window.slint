@@ -49,6 +49,8 @@ component MemoryTile inherits Rectangle {
 }
 
 export component MainWindow inherits Window {
+    callback check_if_pair_solved();
+    in property <bool> disable_tiles;
     width: 326px;
     height: 326px;
 
@@ -72,7 +74,12 @@ export component MainWindow inherits Window {
         // propagate the solved status from the model to the tile
         solved: tile.solved;
         clicked => {
-            tile.image_visible = !tile.image_visible;
+        //    tile.image_visible = !tile.image_visible;
+         if (!root.disable_tiles) {
+            tile.image_visible = true;
+            root.check_if_pair_solved();
         }
     }
+
+}
 }
